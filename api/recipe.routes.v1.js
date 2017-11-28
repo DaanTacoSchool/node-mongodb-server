@@ -12,12 +12,6 @@ var Recipe = require('../model/recipe.model');
 routes.get('/recipes', function (req, res) {
     res.contentType('application/json');
 
-    /*const recipe = new Recipe({
-        name: 'testrecept',
-        description: 'test',
-        imagePath:'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG'
-    }).save();*/
-
     Recipe.find({})
         .then(function (recipes) {
             res.status(200).json(recipes);
@@ -33,9 +27,6 @@ routes.get('/recipes', function (req, res) {
 //
 routes.get('/recipes/:id', function (req, res) {
     res.contentType('application/json');
-    //console.log('single recipe');
-   /// console.log(req);
-  //  console.log('single recipe end');
     Recipe.findOne({ _id: req.params.id })
         .then(function (recipes) {
             res.status(200).json(recipes);
@@ -50,7 +41,6 @@ routes.get('/recipes/:id', function (req, res) {
 // Vorm van de URL: POST http://hostname:3000/api/v1/users
 //
 routes.post('/recipes', function (req, res) {
-    console.log(req);
     const b = req.body;
 
     const recipe = new Recipe({
@@ -75,10 +65,8 @@ routes.post('/recipes', function (req, res) {
 //
 routes.put('/recipes/:id', function (req, res) {
 
-    console.log('slankeneger');
     const b= req.body;
-    //new
-    console.log('----------------------------'+req.body.name);
+
     const recipe = new Recipe({
         _id: req.body._id,
         name: req.body.name,
@@ -87,14 +75,6 @@ routes.put('/recipes/:id', function (req, res) {
         ingredients:req.body.ingredients
     });
 
-
-/*
-    var newvalues = { name: req.body.name, description: req.body.description,
-        imagePath: req.body.imagePath,
-        ingredients: req.body.ingredients };*/
-    console.log('handicapneger');
-   /* mongodb.collection("recipes").updateOne(req.body._id, newvalues, function(err, res){})
-        .catch((error) => console.log('teringaziaat'));*/
 
 
     Recipe.findOneAndUpdate({ _id: recipe._id }, { $set: {
@@ -107,8 +87,6 @@ routes.put('/recipes/:id', function (req, res) {
         res.status(400).json(error);
     });
 
-    console.log('blijeneger');
-
 });
 
 //
@@ -119,12 +97,6 @@ routes.put('/recipes/:id', function (req, res) {
 // Vorm van de URL: DELETE http://hostname:3000/api/v1/users/23
 //
 routes.delete('/recipes/:id', function (req, res) {
-    console.log('delete');
-
-
-
-   console.log(req.params);
-
 
     Recipe.remove({"_id" :req.params.id})
   /* Recipe.findByIdAndRemove(req.params._id)*/

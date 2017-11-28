@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const config = require('./env/env');
+const config = require('./env/env');//env.js
 
 // Gebruik es6 promises ipv mongoose mpromise
 mongoose.Promise = global.Promise;
