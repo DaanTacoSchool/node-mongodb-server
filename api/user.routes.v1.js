@@ -35,6 +35,9 @@ routes.get('/users/:id', function (req, res) {
 //
 routes.post('/users', function (req, res) {
 
+    const b= req.body;
+    console.dir(b);
+    res.status(200).json('test');
 });
 
 //
